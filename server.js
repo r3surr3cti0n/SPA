@@ -3,6 +3,14 @@ const path = require("path");
 
 const app = express();
 
+// Serve the static directory
+// If we go to an URL which has 'static' in it it will serve
+// the 'static' directory as usual.
+app.use(
+	"/static",
+	express.static(path.resolve(__dirname, "frontend", "static"))
+);
+
 // We 'grab' the request and the response.
 // Any path in the url will go back to the root and
 // send back 'index.html'.
