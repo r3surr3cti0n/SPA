@@ -1,4 +1,13 @@
 // This is the client side JS
+// --------------------------
+
+// We will run this function instead of following the links in the HTML.
+// This will prevent the links from their default behaviour.
+// This will happen whenever the link has a 'data-link' in it.
+const navigateTo = (url) => {
+	history.pushState(null, null, url);
+	router();
+};
 
 const router = async () => {
 	// Whenever the user go to this 'path' we will run the
@@ -9,12 +18,12 @@ const router = async () => {
 		{ path: "/settings", view: () => console.log("Viewing Settings") },
 	];
 
-	// Loop through each routes to potential match
+	// Loop through each routes to potential match.
 	const potentialMatches = routes.map((route) => {
 		return {
 			route: route,
 			// Examine that the current route's path matches with the
-			// current location in the browser
+			// current location in the browser.
 			isMatch: route.path === location.pathname,
 		};
 	});
@@ -24,7 +33,7 @@ const router = async () => {
 		(potentialMatch) => potentialMatch.isMatch
 	);
 
-	// If there is no match set 'match' to Home
+	// If there is no match than set 'match' to Home
 	if (!match) {
 		match = {
 			route: routes[0],
@@ -36,6 +45,19 @@ const router = async () => {
 	console.log(match.route.view());
 };
 
+// When the user navigate through the history we need to call 'router()'
+window.addEventListener("popstate", router);
+
 document.addEventListener("DOMContentLoaded", () => {
+	// If the user clicks on a link that contains the 'data-link'
+	// attribute it will prevent it from it's default behaviour
+	// and call the 'nnavigateTo()' function on it's 'href'.
+	document.body.addEventListener("click", (e) => {
+		if (e.target.matches("[data-link]")) {
+			e.preventDefault();
+			navigateTo(e.target.href);
+		}
+	});
+
 	router();
 });
