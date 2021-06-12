@@ -1,5 +1,6 @@
 // This is the client side JS
 // --------------------------
+import Home from "./views/Home.js";
 
 // We will run this function instead of following the links in the HTML.
 // This will prevent the links from their default behaviour.
@@ -13,9 +14,10 @@ const router = async () => {
 	// Whenever the user go to this 'path' we will run the
 	// function which is in the 'view' property.
 	const routes = [
-		{ path: "/", view: () => console.log("Viewing Home") },
-		{ path: "/posts", view: () => console.log("Viewing Posts") },
-		{ path: "/settings", view: () => console.log("Viewing Settings") },
+		// Call 'Home' to actually see the Home page.
+		{ path: "/", view: Home },
+		// { path: "/posts", view: () => console.log("Viewing Posts") },
+		// { path: "/settings", view: () => console.log("Viewing Settings") },
 	];
 
 	// Loop through each routes to potential match.
@@ -41,8 +43,10 @@ const router = async () => {
 		};
 	}
 
-	// Run the function which is inside the 'view' property
-	console.log(match.route.view());
+	// Creating a new instance of the view at the match route
+	const view = new match.route.view();
+	// We get the html from the getHtml() method and inject it into the #app.
+	document.querySelector("#app").innerHTML = await view.getHtml();
 };
 
 // When the user navigate through the history we need to call 'router()'
