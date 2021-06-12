@@ -1,9 +1,11 @@
-import AbstractView from "./AbstractView";
+import AbstractView from "./AbstractView.js";
 
 export default class extends AbstractView {
 	// The constructor is a special method of a class for
 	// creating and initializing an object of that class.
 	constructor() {
+		// The super constructor is very important!
+		super();
 		this.setTitle("Home");
 	}
 
