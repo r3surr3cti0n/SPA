@@ -3,6 +3,7 @@
 import Home from "./views/Home.js";
 import Posts from "./views/Posts.js";
 import Settings from "./views/Settings.js";
+import notFound from "./views/notFound.js";
 
 // We will run this function instead of following the links in the HTML.
 // This will prevent the links from their default behaviour.
@@ -40,8 +41,7 @@ const router = async () => {
 	// If there is no match than set 'match' to Home
 	if (!match) {
 		match = {
-			route: routes[0],
-			isMatch: true,
+			route: { path: "/404", view: notFound },
 		};
 	}
 
