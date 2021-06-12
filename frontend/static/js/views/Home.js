@@ -19,7 +19,7 @@ export default class extends AbstractView {
                 consectetur commodi ducimus!
             </p>
 
-            <b><a href="/posts">Visit posts</a></b>
+            <a class="link" href="/posts" data-link>Visit posts<i class="fas fa-chevron-right right"></i></a>
         `;
 	}
 }
