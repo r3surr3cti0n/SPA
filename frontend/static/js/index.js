@@ -1,6 +1,8 @@
 // This is the client side JS
 // --------------------------
 import Home from "./views/Home.js";
+import Posts from "./views/Posts.js";
+import Settings from "./views/Settings.js";
 
 // We will run this function instead of following the links in the HTML.
 // This will prevent the links from their default behaviour.
@@ -16,8 +18,8 @@ const router = async () => {
 	const routes = [
 		// Call 'Home' to actually see the Home page.
 		{ path: "/", view: Home },
-		// { path: "/posts", view: () => console.log("Viewing Posts") },
-		// { path: "/settings", view: () => console.log("Viewing Settings") },
+		{ path: "/posts", view: Posts },
+		{ path: "/settings", view: Settings },
 	];
 
 	// Loop through each routes to potential match.
